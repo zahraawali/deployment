@@ -1,0 +1,6 @@
+[submodule "auth-service"]
+	path = auth-service
+	url = https://github.com/zahraawali/auth-service
+[submodule "product-service"]
+	path = product-service
+	url = https://github.com/zahraawali/product_service
