@@ -4,3 +4,6 @@
 [submodule "product-service"]
 	path = product-service
 	url = https://github.com/zahraawali/product_service
+[submodule "order-service"]
+	path = order-service
+	url = zah:zahraawali/order-service
