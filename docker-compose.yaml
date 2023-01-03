@@ -138,6 +138,38 @@ services:
       - postgres_data:/var/lib/postgresql/data
     networks:
       - cloud_dev_internal_net
+  
+  order_service:
+    container_name: "order-service"
+    build:
+      context: ./order-service
+      dockerfile: "Dockerfile.api"
+    deploy:
+      resources:
+        limits:
+          cpus: '0.50'
+          memory: 256M
+    restart: on-failure
+    depends_on:
+      - "order_service_database"
+      - "auth_api_server"
+      - "auth_grpc_server"
+      - "product_api"
+      - "product_grpc"
+    networks:
+      - cloud_dev_internal_net
+    ports:
+      - "9000:9000"
+
+  order_service_database:
+    image: mariadb:10.4
+    environment:
+      MYSQL_ROOT_PASSWORD: "myverysecurepassword!!"
+      MYSQL_USER: "devops"
+      MYSQL_PASSWORD: "Passw0rd!"
+      MYSQL_DATABASE: "cloud_compute"
+    networks:
+      - cloud_dev_internal_net
 
 networks:
   cloud_dev_internal_net:
